@@ -1,13 +1,15 @@
-const Errorhandler = (cb) => {
-    return async (req,res) => {
-        try{
-            cb(req,res)
-        }
-        catch(err){
-            console.log(err)
-            return new ErrorMaker(500,err.message || "Something went wrong")
-        }
+const Errorhandler = function (cb) {
+  return async function (req, res) {
+    try {
+      await cb(req, res);
+    } catch (err) {
+      return res.status(err.statusCode).json({
+        statusCode: err.statusCode,
+        message: err.message,
+        success: err.success,
+      });
     }
-}
+  };
+};
 
-module.exports = Errorhandler
+module.exports = Errorhandler;

@@ -2,7 +2,9 @@ class ErrorMaker extends Error{
     constructor(statusCode,message){
         super(message);
         this.statusCode = statusCode;
+        this.message = message;
+        this.success = false
     }
 }
 
-export default ErrorMaker
+module.exports = ErrorMaker

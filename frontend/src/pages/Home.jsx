@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import ShowProducts from "../components/ShowProducts";
 import axios from "axios";
 import Loading from "../components/Loading";
+import Footer from "../components/Footer";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ const Home = () => {
           </section>
         )}
       </div>
+      <Footer/>
     </>
   );
 };
