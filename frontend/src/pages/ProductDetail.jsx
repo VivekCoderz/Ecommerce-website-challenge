@@ -9,7 +9,6 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     setLoading(true);
     const fetchProduct = async () => {
@@ -17,7 +16,6 @@ const ProductDetail = () => {
         const { data } = await axios.get(
           `https://novacart-backend-45p2.onrender.com/products/${id}`,
         );
-        console.log(data);
         setProduct(data.product);
       } catch (err) {
         console.log(err);
