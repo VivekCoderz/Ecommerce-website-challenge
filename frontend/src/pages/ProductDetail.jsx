@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/products/${id}`,
+          `https://novacart-backend-45p2.onrender.com/products/${id}`,
         );
         console.log(data);
         setProduct(data.product);
