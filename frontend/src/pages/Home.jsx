@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ShowProducts from "../components/ShowProducts";
 import axios from "axios";
-import Loading from "../components/Loading";
 import Footer from "../components/Footer";
+import HomeLoading from "../components/Loading/HomeLoading";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const Home = () => {
     <>
       <Navbar />
       <div className="pt-10 w-[80%] m-auto flex flex-wrap">
-        {loading && <Loading />}
+        {loading && <HomeLoading />}
         {!loading && products.length == 0 && <div>There is no product</div>}
         {!loading && products.length != 0 && (
           <section>

@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/HomeLoading";
+import ProductDetailsLoading from "../components/Loading/ProductDetailsLoading";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   useEffect(() => {
-    setLoading(true);
     const fetchProduct = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get(
           `https://novacart-backend-45p2.onrender.com/products/${id}`,
         );
@@ -30,7 +31,7 @@ const ProductDetail = () => {
   return (
     <>
       <Navbar />
-      {loading && <Loading />}
+      {loading && <ProductDetailsLoading />}
       {!loading && (
         <section className="bg-gray-100 min-h-screen py-8">
           <div className="max-w-7xl mx-auto px-4">
@@ -84,7 +85,7 @@ const ProductDetail = () => {
                     </div>
 
                     <div className="bg-gray-100 rounded-xl p-4">
-                      ⭐ 4.8 Rating
+                      ⭐ {product.rating} Rating
                     </div>
                   </div>
 
@@ -106,11 +107,7 @@ const ProductDetail = () => {
             <div className="bg-white rounded-2xl shadow-lg mt-8 p-6">
               <h2 className="text-2xl font-bold mb-4">Product Description</h2>
 
-              <p className="text-gray-600 leading-8">
-                Designed for professionals and music lovers, these wireless
-                headphones provide exceptional comfort, immersive audio, active
-                noise cancellation, and long battery life for daily use.
-              </p>
+              <p className="text-gray-600 leading-8">{product.description}</p>
             </div>
           </div>
         </section>

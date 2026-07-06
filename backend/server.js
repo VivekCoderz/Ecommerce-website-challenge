@@ -1,16 +1,25 @@
-const express = require("express")
-mongoose = require("mongoose")
 require('dotenv').config()
-const app = express()
+const express = require("express")
+const mongoose = require("mongoose")
+const cookieParser = require("cookie-parser")
 const cors = require("cors")
 
-app.use(cors())
+const app = express()
 
+
+app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
+
 
 // Routes
 const productRoute = require("./routes/product.js")
 app.use("/products", productRoute)
+
+const authRoute = require("./routes/auth.js")
+app.use("/auth", authRoute)
+
+
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log("DB Connection Successfull")

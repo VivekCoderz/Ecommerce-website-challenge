@@ -1,4 +1,4 @@
-const Loading = () => {
+const HomeLoading = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <div className="h-10 w-60 bg-gray-200 rounded animate-pulse mb-8"></div>
@@ -29,4 +29,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default HomeLoading;
