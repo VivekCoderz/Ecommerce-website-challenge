@@ -89,3 +89,62 @@ Today I completed the foundation of the project.
 Stay tuned for **Day 2** 🚀
 
 ## ⭐ If you like this project, don't forget to star the repository.
+
+---
+
+# 📅 Day 2 – Authentication & Redux Integration
+
+## 🚀 What I Accomplished
+
+Today, I focused on implementing the authentication module while following a clean and scalable project architecture.
+
+### ✅ Frontend
+- Built a fully responsive **Login Page**
+- Built a fully responsive **Register Page**
+- Improved the overall UI using **Tailwind CSS**
+- Added loading states for authentication requests
+- Added proper form handling and validation
+
+### ✅ Redux Toolkit
+- Created an **Auth Slice**
+- Managed global authentication state
+- Implemented:
+  - `loading`
+  - `isAuthenticated`
+  - `user`
+  - `error`
+
+### ✅ Dynamic Navbar
+Implemented conditional rendering based on authentication status.
+
+- Before Login
+  - Login Button
+  - Register Button
+
+- After Login
+  - Greeting with User Name
+  - Cart Icon
+
+### ✅ Authentication Planning
+Researched and planned a production-level authentication flow using:
+- JWT Authentication
+- HTTP-only Cookies
+- Redux Toolkit
+- Persistent Login (`Load User`)
+
+---
+
+## 📚 Key Learnings
+
+Today I learned how real-world applications manage authentication state using Redux Toolkit instead of local component state. I also understood why production applications use HTTP-only cookies and the `Load User` approach to keep users logged in after refreshing the page.
+
+---
+
+## 🎯 Next Goals (Day 3)
+
+- Implement JWT Authentication
+- Store Token in HTTP-only Cookies
+- Build `GET /me` API
+- Persistent Login after Refresh
+- Protected Routes
+- Logout Functionality
