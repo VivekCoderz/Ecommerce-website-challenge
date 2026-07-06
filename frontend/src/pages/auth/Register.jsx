@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/auth/register", formData);
+      await axios.post("https://novacart-backend-45p2.onrender.com/auth/register", formData);
       navigator("/login");
     } catch (err) {
       setError(err.response.data.message);

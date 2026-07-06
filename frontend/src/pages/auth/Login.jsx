@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     try{
         dispatch(loginStart())
-        const {data} = await axios.post('http://localhost:5000/auth/login',formData)
+        const {data} = await axios.post('https://novacart-backend-45p2.onrender.com/auth/login',formData)
         dispatch(loginSuccess(data.user));
         navigator('/')
     }catch(errer){
