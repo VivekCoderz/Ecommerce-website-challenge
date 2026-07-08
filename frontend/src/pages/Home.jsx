@@ -7,8 +7,10 @@ import HomeLoading from "../components/Loading/HomeLoading";
 import api from "../api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loginStart, loginSuccess } from "../Redux/feature/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+const navigator = useNavigate()
   const dispatch = useDispatch();
   const user = useSelector((store) => store.auth.user);
   const homeLoading = useSelector((store) => store.auth.loading);
@@ -23,6 +25,7 @@ const Home = () => {
         setProducts(data.products);
       } catch (err) {
         console.log(err);
+        navigator('/login')
       } finally {
         setLoading(false);
       }
