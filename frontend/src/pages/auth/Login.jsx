@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess ,loginStart,loginFail} from "../../Redux/feature/authSlice.js";
-import axios from "axios"
+import api from "../../api/axios.js"
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     try{
         dispatch(loginStart())
-        const {data} = await axios.post('https://novacart-backend-45p2.onrender.com/auth/login',formData)
+        const {data} = await api.post('/auth/login',formData)
         dispatch(loginSuccess(data.user));
         navigator('/')
     }catch(errer){

@@ -1,7 +1,7 @@
 const Errorhandler = function (cb) {
-  return async function (req, res) {
+  return async function (req, res,next) {
     try {
-      await cb(req, res);
+      await cb(req, res,next);
     } catch (err) {
       return res.status(err.statusCode).json({
         statusCode: err.statusCode,

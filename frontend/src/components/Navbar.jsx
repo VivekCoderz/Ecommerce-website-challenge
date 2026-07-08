@@ -1,18 +1,11 @@
 import { useState } from "react";
-import {
-  ShoppingCart,
-  Search,
-  Menu,
-  X,
-  Store,
-} from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { isAuthenticated, user } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { items } = useSelector((state) => state.cart);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,7 +14,6 @@ const Navbar = () => {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <Store className="text-indigo-600" size={34} />
@@ -32,10 +24,7 @@ const Navbar = () => {
 
           {/* Desktop Search */}
           <div className="hidden md:flex items-center w-[420px] relative">
-            <Search
-              className="absolute left-4 text-gray-400"
-              size={18}
-            />
+            <Search className="absolute left-4 text-gray-400" size={18} />
 
             <input
               type="text"
@@ -46,7 +35,6 @@ const Navbar = () => {
 
           {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-5">
-
             {!isAuthenticated ? (
               <>
                 <Link
@@ -69,14 +57,11 @@ const Navbar = () => {
                   👋 Hi, {user?.fullName}
                 </p>
 
-                <Link
-                  to="/cart"
-                  className="relative"
-                >
+                <Link to="/cart" className="relative">
                   <ShoppingCart className="hover:text-indigo-600" />
 
                   <span className="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    3
+                    {items.length}
                   </span>
                 </Link>
               </>
@@ -84,24 +69,15 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden"
-          >
-            {menuOpen ? (
-              <X size={28} />
-            ) : (
-              <Menu size={28} />
-            )}
+          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden border-t bg-white shadow-md">
-
             <div className="px-4 py-4 flex flex-col gap-4">
-
               {/* Mobile Search */}
               <div className="relative">
                 <Search
@@ -137,13 +113,9 @@ const Navbar = () => {
               ) : (
                 <>
                   <div className="border rounded-xl p-4 bg-gray-50">
-                    <p className="text-gray-500 text-sm">
-                      Welcome Back 👋
-                    </p>
+                    <p className="text-gray-500 text-sm">Welcome Back 👋</p>
 
-                    <h2 className="font-bold text-lg mt-1">
-                      {user?.fullName}
-                    </h2>
+                    <h2 className="font-bold text-lg mt-1">{user?.fullName}</h2>
                   </div>
 
                   <Link
@@ -152,12 +124,11 @@ const Navbar = () => {
                     className="flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700"
                   >
                     <ShoppingCart size={20} />
-                    Cart (3)
+                    Cart ({items.length})
                   </Link>
                 </>
               )}
             </div>
-
           </div>
         )}
       </nav>

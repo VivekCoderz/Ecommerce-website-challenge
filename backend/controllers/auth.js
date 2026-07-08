@@ -41,11 +41,16 @@ module.exports.postLogin = ErrorHandler(async (req, res) => {
   const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
   if (!isPasswordCorrect) throw new ErrorMaker(400, "password is incorrect");
   const token = await jwt.sign(
-    { _id: existUser._id },
+    { id: existUser._id },
     process.env.JWT_SECRET_KEY,
     { expiresIn: "1d" },
   );
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    // secure: true,
+    // sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   res.status(200).json({ message: "Login done successfully", user: existUser });
 });
 
@@ -53,3 +58,10 @@ module.exports.postLogout = ErrorHandler(async (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logout successfully" });
 });
+
+
+module.exports.getme = ErrorHandler(async (req,res)=>{
+    console.log(req.user)
+    const user = await User.findOne({_id : req.user.id})
+    res.status(200).json({user})
+})

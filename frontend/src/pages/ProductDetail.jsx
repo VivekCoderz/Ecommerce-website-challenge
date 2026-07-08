@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading/HomeLoading";
 import ProductDetailsLoading from "../components/Loading/ProductDetailsLoading";
+import api from "../api/axios";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
@@ -14,9 +15,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(
-          `https://novacart-backend-45p2.onrender.com/products/${id}`,
-        );
+        const { data } = await api.get(`/products/${id}`);
         setProduct(data.product);
       } catch (err) {
         console.log(err);

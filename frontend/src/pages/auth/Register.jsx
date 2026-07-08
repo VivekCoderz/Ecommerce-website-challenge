@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios'
+import api from '../../api/axios.js'
 
 const Register = () => {
   const [ loading, setLoading ] = useState(false);
@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("https://novacart-backend-45p2.onrender.com/auth/register", formData);
+      await api.post("/auth/register", formData);
       navigator("/login");
     } catch (err) {
       setError(err.response.data.message);
