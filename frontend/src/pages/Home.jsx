@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import HomeLoading from "../components/Loading/HomeLoading";
 import api from "../api/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess } from "../Redux/feature/authSlice";
+import { loginFail, loginStart, loginSuccess } from "../Redux/feature/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -41,7 +41,7 @@ const navigator = useNavigate()
         console.log(data.user);
         dispatch(loginSuccess(data.user));
       } catch (err) {
-        console.log(err);
+          dispatch(loginFail())
       } finally {
         setLoading(false);
       }
