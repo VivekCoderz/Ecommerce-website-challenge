@@ -8,6 +8,7 @@ import api from "../api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFail, loginStart, loginSuccess } from "../Redux/feature/authSlice";
 import { useNavigate } from "react-router-dom";
+import { setCart } from "../Redux/feature/cartSlice";
 
 const Home = () => {
 const navigator = useNavigate()
@@ -25,7 +26,6 @@ const navigator = useNavigate()
         setProducts(data.products);
       } catch (err) {
         console.log(err);
-        navigator('/login')
       } finally {
         setLoading(false);
       }
@@ -33,39 +33,6 @@ const navigator = useNavigate()
     productFetch();
   }, []);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-        dispatch(loginStart())
-      try {
-        const { data } = await api.get("/auth/me");
-        console.log(data.user);
-        dispatch(loginSuccess(data.user));
-      } catch (err) {
-          dispatch(loginFail())
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
-
-  if (homeLoading) {
-    return (
-      <>
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold">
-              Nova<span className="text-indigo-600">Cart</span>
-            </h1>
-
-            <div className="mt-6 h-12 w-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-
-            <p className="mt-4 text-gray-500">Checking your session...</p>
-          </div>
-        </div>
-      </>
-    );
-  }
   return (
     <>
       <Navbar />
@@ -74,7 +41,6 @@ const navigator = useNavigate()
         {!loading && products.length == 0 && <div>There is no product</div>}
         {!loading && products.length != 0 && (
           <section>
-            <h2 className="mb-5 text-[28px] font-bold text-black">Products</h2>
             <ShowProducts products={products} />
           </section>
         )}
