@@ -13,6 +13,7 @@ import {
 } from "./Redux/feature/authSlice.js";
 import api from "./api/axios";
 import { setCart, setLoading } from "./Redux/feature/cartSlice.js";
+import Wishlist from "./pages/Wishlist.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

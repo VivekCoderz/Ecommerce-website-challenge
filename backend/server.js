@@ -22,8 +22,14 @@ app.use("/products", productRoute);
 const authRoute = require("./routes/auth.js");
 app.use("/auth", authRoute);
 
-const userRoute = require("./routes/cart.js");
-app.use("/cart", userRoute);
+const cartRoute = require("./routes/cart.js");
+app.use("/cart", cartRoute);
+
+const wishlistRoute = require("./routes/wishlist.js");
+app.use("/wishlist", wishlistRoute);
+
+const reviewRoute = require("./routes/review.js");
+app.use("/review", reviewRoute);
 
 mongoose
   .connect(process.env.MONGO_URL)
