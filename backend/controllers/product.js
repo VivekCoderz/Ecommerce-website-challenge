@@ -17,7 +17,7 @@ module.exports.getProductById = Errorhandler(async (req,res)=>{
         throw new ErrorMaker(400,"Invalid Product Id")
     }
     const product = await Product.findById(id)
-    if(!product) throw new ErrorMaker(400,"Product is not found")
+    if(!product) throw new ErrorMaker(404,"Product is not found")
     res.status(200).json({
         success: true,
         product
