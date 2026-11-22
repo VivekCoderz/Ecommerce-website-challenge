@@ -8,9 +8,12 @@ import {
   Heart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setKeyword } from "../Redux/feature/searchSlice";
 
 const Navbar = () => {
+    const keyword = useSelector(store=>store.search.keyword)
+    const dispatch = useDispatch()
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const cartItems = useSelector((state) => state.cart.items);
@@ -34,11 +37,14 @@ const Navbar = () => {
         <div className="hidden md:flex items-center w-[420px] relative">
           <Search className="absolute left-4 text-gray-400" size={18} />
 
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="w-full border rounded-xl pl-12 pr-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500"
-          />
+         <input
+  type="text"
+  value={keyword}
+  onChange={(e) => dispatch(setKeyword(e.target.value))}
+  placeholder="Search products..."
+  className="w-full border rounded-xl pl-12 pr-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500"
+/>
+
         </div>
 
         {/* Desktop */}

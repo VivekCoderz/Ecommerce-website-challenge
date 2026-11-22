@@ -84,7 +84,7 @@ const Cart = () => {
                       />
 
                       <div className="flex-1">
-                        <h2 className="text-xl font-semibold">{item.title}</h2>
+                        <h2 className="text-xl font-semibold">{item.product.title}</h2>
 
                         <p className="text-indigo-600 font-bold text-xl mt-2">
                           ₹{item.product.price}

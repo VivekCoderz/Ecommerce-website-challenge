@@ -38,6 +38,8 @@ module.exports.postAddReview = Errorhandler(async (req, res) => {
 
 module.exports.postDeleteReview = Errorhandler(async (req, res) => {
   const reviewId = req.params.id;
+  console.log(reviewId);
+
   if (!mongoose.Types.ObjectId.isValid(reviewId))
     throw new ErrorMaker(400, "Invalid Review Id");
   const review = await Review.findByIdAndDelete(reviewId);
@@ -56,7 +58,7 @@ module.exports.getAllReview = Errorhandler(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(productId))
     throw new ErrorMaker(400, "Invalid Product Id");
   const review = await Review.find({ product: productId })
-    .populate("user", "fullName")
+    .populate("user", "_id fullName")
     .sort({ createdAt: -1 });
   res.status(200).json({ review: review });
 });

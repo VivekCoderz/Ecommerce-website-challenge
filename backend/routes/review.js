@@ -5,8 +5,8 @@ const authentication = require("../middleware/authentication.js");
 
 router.post("/add/:id", authentication, reviewController.postAddReview);
 
-router.post("/delete/:id", authentication, reviewController.postDeleteReview);
+router.delete("/delete/:id", authentication, reviewController.postDeleteReview);
 
-router.get("/", authentication, reviewController.getAllReview);
+router.get("/:id", authentication, reviewController.getAllReview);
 
 module.exports = router
