@@ -51,17 +51,20 @@ module.exports.postLogin = ErrorHandler(async (req, res) => {
     sameSite: "none",
     maxAge: 24 * 60 * 60 * 1000,
   });
-  res.status(200).json({ message: "Login done successfully", user: existUser });
+  const user = existUser.toObject();
+  delete user.password;
+  res.status(200).json({ message: "Login done successfully", user });
 });
 
 module.exports.postLogout = ErrorHandler(async (req, res) => {
-  res.clearCookie("token");
+  // Must match the options used when the cookie was set, or the browser keeps it
+  res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none" });
   res.status(200).json({ message: "Logout successfully" });
 });
 
 
 module.exports.getme = ErrorHandler(async (req,res)=>{
     console.log(req.user)
-    const user = await User.findOne({_id : req.user.id})
+    const user = await User.findOne({_id : req.user.id}).select("-password")
     res.status(200).json({user})
 })
