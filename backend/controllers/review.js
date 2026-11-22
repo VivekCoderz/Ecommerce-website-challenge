@@ -38,15 +38,16 @@ module.exports.postAddReview = Errorhandler(async (req, res) => {
 
 module.exports.postDeleteReview = Errorhandler(async (req, res) => {
   const reviewId = req.params.id;
-  console.log(reviewId);
-
   if (!mongoose.Types.ObjectId.isValid(reviewId))
     throw new ErrorMaker(400, "Invalid Review Id");
-  const review = await Review.findByIdAndDelete(reviewId);
+  const review = await Review.findById(reviewId);
 
   if (!review) {
     throw new ErrorMaker(404, "Review not found");
   }
+  if (review.user.toString() !== req.user.id)
+    throw new ErrorMaker(403, "You can only delete your own review");
+  await review.deleteOne();
 
   res.status(200).json({
     message: "Review Deleted Successfully",
