@@ -32,7 +32,7 @@ const Login = () => {
         dispatch(loginSuccess(data.user));
         navigator('/')
     }catch(errer){
-        dispatch(loginFail(errer.response.data.message))
+        dispatch(loginFail(errer.response?.data?.message || "Login failed, please try again"))
     }
   };
 

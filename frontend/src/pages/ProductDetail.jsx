@@ -62,6 +62,7 @@ const ProductDetail = () => {
 
       setProduct(data.product);
     } catch (err) {
+      setProduct(null);
       console.log(err);
     } finally {
       setLoading(false);
@@ -156,6 +157,17 @@ const ProductDetail = () => {
       <>
         <Navbar />
         <ProductDetailsLoading />
+        <Footer />
+      </>
+    );
+
+  if (!product)
+    return (
+      <>
+        <Navbar />
+        <div className="min-h-[60vh] flex items-center justify-center text-xl text-gray-500">
+          Product not found
+        </div>
         <Footer />
       </>
     );
