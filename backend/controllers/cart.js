@@ -17,7 +17,10 @@ module.exports.getCart = ErrorHandler(async (req, res) => {
 
 
 module.exports.postAddToCart = ErrorHandler(async (req, res) => {
-  const { productId, quantity = 1 } = req.body;
+  const { productId } = req.body;
+  const quantity = Number(req.body.quantity ?? 1);
+  if (!Number.isInteger(quantity) || quantity < 1)
+    throw new ErrorMaker(400, "Quantity must be a positive integer");
 
   
   if (!mongoose.Types.ObjectId.isValid(productId))

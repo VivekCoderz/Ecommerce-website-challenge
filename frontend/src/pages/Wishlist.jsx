@@ -61,7 +61,7 @@ const Wishlist = () => {
 
   const handleAddToCart = async (productId) => {
     try {
-      csetLoading(true)
+      dispatch(csetLoading(true));
 
       const { data } = await api.post("/cart/add-to-cart", {
         productId,
@@ -72,14 +72,14 @@ const Wishlist = () => {
     } catch (err) {
       console.log(err);
     } finally {
-        csetLoading(false)
+      dispatch(csetLoading(false));
     }
   };
 
-    const handleRemoveFromCart = async (product) => {
-        console.log(product)
+  const handleRemoveFromCart = async (product) => {
+    console.log(product)
     try {
-      csetLoading(true);
+      dispatch(csetLoading(true));
 
       const { data } = await api.post("/cart/remove-item", {
         productId: product,
@@ -89,7 +89,7 @@ const Wishlist = () => {
     } catch (err) {
       dispatch(setError(err.response?.data?.message || "Something went wrong"));
     } finally {
-      csetLoading(false);
+      dispatch(csetLoading(false));
     }
   };
 

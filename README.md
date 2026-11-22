@@ -148,3 +148,21 @@ Today I learned how real-world applications manage authentication state using Re
 - Persistent Login after Refresh
 - Protected Routes
 - Logout Functionality
+---
+
+# 🛠️ Run Locally
+
+```bash
+# Backend (needs MONGO_URL, PORT and JWT_SECRET_KEY in backend/.env)
+cd backend
+npm install
+npm start
+
+# Frontend
+cd frontend
+npm install
+echo "VITE_API_URL=http://localhost:5000" > .env.local   # omit to use the Render backend
+npm run dev
+```
+
+The backend allows CORS from `http://localhost:5173`, `http://localhost:5175` and the Vercel site.

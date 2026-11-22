@@ -1,9 +1,13 @@
 const Wishlist = require("../models/wishlist");
+const mongoose = require("mongoose");
 const Errorhandler = require("../utils/ErrorHandler");
+const ErrorMaker = require("../utils/ErrorMaker");
 
 module.exports.addWishlist = Errorhandler(async (req,res)=>{
      const userId = req.user.id;
   const productId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(productId))
+    throw new ErrorMaker(400, "Invalid Product Id");
   let wishlist = await Wishlist.findOne({ user: userId });
   console.log(wishlist)
 

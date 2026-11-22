@@ -3,10 +3,11 @@ const Errorhandler = function (cb) {
     try {
       await cb(req, res,next);
     } catch (err) {
-      return res.status(err.statusCode).json({
-        statusCode: err.statusCode,
-        message: err.message,
-        success: err.success,
+      const statusCode = err.statusCode || 500;
+      return res.status(statusCode).json({
+        statusCode: statusCode,
+        message: err.message || "Internal Server Error",
+        success: err.success || false,
       });
     }
   };

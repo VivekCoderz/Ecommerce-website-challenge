@@ -14,19 +14,33 @@ import {
 import api from "./api/axios";
 import { setCart, setLoading } from "./Redux/feature/cartSlice.js";
 import Wishlist from "./pages/Wishlist.jsx";
+import { setWishlist } from "./Redux/feature/wishListSlice.js";
 
 const App = () => {
   const dispatch = useDispatch();
   const homeLoading = useSelector((store) => store.auth.loading);
   const fetchCart = async () => {
     try {
-        setLoading(true)
+        dispatch(setLoading(true));
         const { data } = await api.get("/cart/");
         dispatch(setCart(data.cart));
     } catch (err) {
-        console.log(err.response.data);
+        console.log(err.response?.data || err.message);
     }finally{
-        setLoading(true)
+        dispatch(setLoading(false));
+    }
+  };
+
+  const fetchWishlist = async () => {
+    try {
+        dispatch(setLoading(true));
+        const { data } = await api.get("/wishlist/");
+        console.log(data)
+        dispatch(setWishlist(data.wishlist.items));
+    } catch (err) {
+        console.log(err.response?.data || err.message);
+    }finally{
+        dispatch(setLoading(false));
     }
   };
 
@@ -38,7 +52,8 @@ const App = () => {
         console.log(data.user);
         dispatch(loginSuccess(data.user));
         fetchCart();
-      } catch (err) {
+        fetchWishlist()
+      } catch {
         dispatch(loginFail());
       }
     };

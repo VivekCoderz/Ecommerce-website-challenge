@@ -13,18 +13,24 @@ const ProductCard = ({ product }) => {
   const [loading, setLoading] = useState(false);
 
   const wishlist = useSelector((store) => store.wishlist.items);
-console.log(wishlist)
   const isInCart = cart.some((item) => item.product._id === product._id);
 
   const handleAddWishlist = async (productId) => {
-    const { data } = await api.post(`/wishlist/add/${productId}`);
-    console.log(data.wishlist.items)
-    dispatch(setWishlist(data.wishlist.items));
+    try {
+      const { data } = await api.post(`/wishlist/add/${productId}`);
+      dispatch(setWishlist(data.wishlist.items));
+    } catch (err) {
+      dispatch(setError(err.response?.data?.message || "Something went wrong"));
+    }
   };
 
   const handleRemoveWishlist = async (productId) => {
+    try {
       const { data } = await api.post(`/wishlist/remove/${productId}`);
-    dispatch(setWishlist(data.wishlist.items));
+      dispatch(setWishlist(data.wishlist.items));
+    } catch (err) {
+      dispatch(setError(err.response?.data?.message || "Something went wrong"));
+    }
   };
 
   const handleAddToCart = async () => {

@@ -8,7 +8,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://novacart-topaz.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5175",
+      "https://novacart-topaz.vercel.app",
+    ],
     credentials: true,
   }),
 );
