@@ -53,7 +53,7 @@ const App = () => {
         dispatch(loginSuccess(data.user));
         fetchCart();
         fetchWishlist()
-      } catch (err) {
+      } catch {
         dispatch(loginFail());
       }
     };
